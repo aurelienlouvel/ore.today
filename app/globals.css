@@ -3,6 +3,13 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@font-face {
+    font-family: "PP Neue Montreal";
+    src: url("/public/font/PPMuseum-UltraboldItalic.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
 html,
 body {
     max-width: 100vw;
@@ -12,12 +19,7 @@ body {
 body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+    font-family: "PP Neue Montreal";
 }
 
 a {
@@ -139,10 +141,46 @@ a {
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+    * {
+        @apply border-border outline-ring/50;
     }
-  body {
-    @apply bg-background text-foreground;
+    body {
+        @apply bg-background text-foreground;
     }
+}
+
+@utility font-thin {
+    font-variation-settings: "wght" 100;
+}
+
+@utility font-extralight {
+    font-variation-settings: "wght" 200;
+}
+
+@utility font-light {
+    font-variation-settings: "wght" 300;
+}
+
+@utility font-normal {
+    font-variation-settings: "wght" 400;
+}
+
+@utility font-medium {
+    font-variation-settings: "wght" 500;
+}
+
+@utility font-semibold {
+    font-variation-settings: "wght" 600;
+}
+
+@utility font-bold {
+    font-variation-settings: "wght" 700;
+}
+
+@utility font-extrabold {
+    font-variation-settings: "wght" 800;
+}
+
+@utility font-black {
+    font-variation-settings: "wght" 900;
 }

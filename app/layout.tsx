@@ -1,17 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const neueMontreal = localFont({
+  src: "../public/fonts/PPNeueMontreal-Variable.ttf",
 });
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
   title: "oré ˖ ࣪⊹ product designer",
   description: "aurélien louvel's internet space",
@@ -43,9 +36,7 @@ export default function RootLayout({
       <head>
         <meta name="apple-mobile-web-app-title" content="oré ˖ ࣪⊹" />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
-      </body>
+      <body className={`${neueMontreal.className} `}>{children}</body>
     </html>
   );
 }
