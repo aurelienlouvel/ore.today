@@ -1,5 +1,3 @@
-// app/page.tsx ou pages/index.tsx (selon si t'es en App Router ou Pages Router)
-
 import { Analytics } from "@vercel/analytics/react";
 
 export default function Home() {
