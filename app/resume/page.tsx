@@ -1,14 +1,13 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import Logo from "@/components/assets/logo";
 
 export default function PDFViewerPage() {
   const [language, setLanguage] = useState("en");
   const [pdfDoc, setPdfDoc] = useState(null);
-  const [scale, setScale] = useState(6);
   const [isLoading, setIsLoading] = useState(true);
   const canvasRef = useRef(null);
 
@@ -51,7 +50,7 @@ export default function PDFViewerPage() {
     if (!pdf || !canvasRef.current) return;
 
     const page = await pdf.getPage(num);
-    const viewport = page.getViewport({ scale });
+    const viewport = page.getViewport({ scale: 6 });
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
 
@@ -66,7 +65,6 @@ export default function PDFViewerPage() {
     await page.render(renderContext).promise;
   };
 
-  // Re-render quand la page ou le scale change
   useEffect(() => {
     if (pdfDoc && !isLoading) {
       renderPage(1);
