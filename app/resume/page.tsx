@@ -6,7 +6,7 @@ declare global {
   }
 }
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
@@ -14,9 +14,9 @@ import Logo from "@/components/assets/logo";
 
 export default function PDFViewerPage() {
   const [language, setLanguage] = useState("en");
-  const [pdfDoc, setPdfDoc] = useState(null);
+  const [pdfDoc, setPdfDoc] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const canvasRef = useRef(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Charger PDF.js et le document PDF
   useEffect(() => {
@@ -53,30 +53,33 @@ export default function PDFViewerPage() {
     }
   };
 
-  const renderPage = async (num, pdf = pdfDoc) => {
-    if (!pdf || !canvasRef.current) return;
+  const renderPage = useCallback(
+    async (num: number, pdf: any = pdfDoc) => {
+      if (!pdf || !canvasRef.current) return;
 
     const page = await pdf.getPage(num);
     const viewport = page.getViewport({ scale: 6 });
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
 
-    canvas.height = viewport.height;
-    canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
 
-    const renderContext = {
-      canvasContext: context,
-      viewport: viewport,
-    };
+      const renderContext = {
+        canvasContext: context,
+        viewport: viewport,
+      };
 
-    await page.render(renderContext).promise;
-  };
+      await page.render(renderContext).promise;
+    },
+    [pdfDoc],
+  );
 
   useEffect(() => {
     if (pdfDoc && !isLoading) {
       renderPage(1);
     }
-  }, [pdfDoc, isLoading]);
+  }, [pdfDoc, isLoading, renderPage]);
 
   const handleDownload = () => {
     const link = document.createElement("a");
