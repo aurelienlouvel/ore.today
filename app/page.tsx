@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div style={{ width: "100vw", height: "100vh", overflow: "hidden" }}>
       <iframe
-        src="https://bento.me/aurelienlouvel"
+        src="https://aurelienlouvel-ore.notion.site/portfolio"
         style={{
           width: "100%",
           height: "100%",
