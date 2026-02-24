@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 
 const neueMontreal = localFont({
-  src: "../public/fonts/PPNeueMontreal-Variable.ttf",
+  src: "../../public/fonts/PPNeueMontreal-Variable.ttf",
 });
 export const metadata: Metadata = {
   title: "oré ˖ ࣪⊹ product designer",
